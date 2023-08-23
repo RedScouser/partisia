@@ -1,19 +1,10 @@
-image: registry.gitlab.com/partisia/dockerimages/rustmaven:1.67
+variables:
+  DEPLOYABLE: 'false'
 
-stages:
-- build
-
-build:
-  stage: build
-  script:
-  - cargo install cargo-partisia-contract
-  - cargo partisia-contract build --release
-
-codequality:
-  stage: build
-  except:
-  - main
-  script:
-  - cargo check
-  - cargo clippy --all-targets --all-features -- -D warnings -D missing_docs
-  - cargo fmt --all -- --check
+include:
+- project: 'secata-public/pom/shared-ci'
+  file: 'contract-java-test.yml'
+  ref: 'par-8738_update-CI-to-2.10.0'
+- project: 'secata-public/pom/shared-ci'
+  file: 'rust-contract.yml'
+  ref: 'par-8738_update-CI-to-2.10.0'
