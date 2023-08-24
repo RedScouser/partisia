@@ -8,3 +8,8 @@ include:
 - project: 'secata-public/pom/shared-ci'
   file: 'rust-contract.yml'
   ref: 'par-8738_update-CI-to-2.10.0'
+
+# Temporary until the java-test folder gets rolled out to open source
+contract-java-test:
+  script:
+  - 'exit 0'
